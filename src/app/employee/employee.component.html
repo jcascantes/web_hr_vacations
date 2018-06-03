@@ -1,0 +1,33 @@
+<div *ngIf="!edit">
+  <h1>Employee Details </h1>
+  <h2>{{currentEmployee.name}}</h2>
+  <div><span>id: </span>{{currentEmployee.id}}</div>
+  <div><span>Recruitment Date: </span>{{currentEmployee.start_date | date}}</div>
+  <div><span>Current status: </span>{{currentEmployee.status}}</div>
+  <input type="button" (click)="editModeClicked($event, item)" value="New Emmployee" > 
+</div>
+
+<div *ngIf="edit">
+  <div>
+    <label>Id:
+      <input [(ngModel)]="newEmployee.id" placeholder="id">
+    </label>
+  </div>
+  <div>
+    <label>Name:
+      <input [(ngModel)]="newEmployee.name" placeholder="name">
+    </label>
+  </div>
+  <div>
+    <label>Recruitment Date:
+      <input [(ngModel)]="newEmployee.start_date" type="date" placeholder="Recruitment Date">
+    </label>
+  </div>
+  <input type="button" (click)="saveClicked($event,item)" value="Save" >
+</div>
+
+
+<div><label>{{message}}</label></div>
+
+
+
