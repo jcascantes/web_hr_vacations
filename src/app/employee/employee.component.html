@@ -1,29 +1,34 @@
-<div *ngIf="!edit">
-  <h1>Employee Details </h1>
-  <h2>{{currentEmployee.name}}</h2>
-  <div><span>id: </span>{{currentEmployee.id}}</div>
-  <div><span>Recruitment Date: </span>{{currentEmployee.start_date | date}}</div>
-  <div><span>Current status: </span>{{currentEmployee.status}}</div>
-  <input type="button" (click)="editModeClicked($event, item)" value="New Emmployee" > 
+<div *ngIf="!edit" class="row">
+  <div class="col-md-4">
+    <h1>Employee Details </h1>
+    <h2>{{currentEmployee.Name}}</h2>
+    <div class="row"><label class="col-sm-4">Id: </label><span class="col-sm-8">{{currentEmployee.Id}}</span></div>
+    <div class="row"><label class="col-sm-4">Recruitment Date:</label><span class="col-sm-8">{{currentEmployee.StartDate | date}}</span></div>
+    <div class="row"><label class="col-sm-4">Current status:</label><span class="col-sm-8">{{currentEmployee.Status}}</span></div>
+    <input type="button" class="btn btn-success m-1" (click)="editModeClicked($event, item)" value="New Emmployee" > 
+    <input type="button" class="btn btn-info" (click)="loadHolidaysClicked($event, item)" value="Load holidays historic" > 
+  </div>
+  <div class="col-md-8">
+    <app-holidays [holidayList]="holidayList"></app-holidays>
+  </div>
 </div>
 
-<div *ngIf="edit">
-  <div>
-    <label>Id:
-      <input [(ngModel)]="newEmployee.id" placeholder="id">
-    </label>
+<div *ngIf="edit" class="row" >
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="inputId">Employee Id</label>
+        <input id="inputId"  [(ngModel)]="newEmployee.Id" placeholder="id" class="form-control"> 
+    </div>
+    <div class="form-group">
+      <label for="inputName">Name</label>
+        <input id="inputName" [(ngModel)]="newEmployee.Name" placeholder="name" class="form-control"> 
+    </div>
+    <div class="form-group">
+      <label for="inputStartDate">Recruitment Date</label>
+        <input id="inputStartDate" [(ngModel)]="newEmployee.StartDate" type="date" placeholder="Recruitment Date" class="form-control">   
+    </div>
+    <input type="button" class="btn btn-primary" (click)="saveClicked($event,item)" value="Save" >
   </div>
-  <div>
-    <label>Name:
-      <input [(ngModel)]="newEmployee.name" placeholder="name">
-    </label>
-  </div>
-  <div>
-    <label>Recruitment Date:
-      <input [(ngModel)]="newEmployee.start_date" type="date" placeholder="Recruitment Date">
-    </label>
-  </div>
-  <input type="button" (click)="saveClicked($event,item)" value="Save" >
 </div>
 
 

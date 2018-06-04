@@ -20,7 +20,7 @@ export class HolidayService {
   constructor() { }
 
 
-  getHolidayList(Id: string): Observable<Holiday[]>
+  getHolidayList(Id: number): Observable<Holiday[]>
   {
     return of(this.holidayList);
   }
