@@ -1,7 +1,7 @@
 <div *ngIf="!edit" class="row">
   <div class="col-md-4">
     <h1>Employee Details </h1>
-    <h2>{{currentEmployee.Name}}</h2>
+    <h2>{{currentEmployee.FirstName}} {{currentEmployee.LastName}}</h2>
     <div class="row"><label class="col-sm-4">Id: </label><span class="col-sm-8">{{currentEmployee.Id}}</span></div>
     <div class="row"><label class="col-sm-4">Recruitment Date:</label><span class="col-sm-8">{{currentEmployee.StartDate | date}}</span></div>
     <div class="row"><label class="col-sm-4">Current status:</label><span class="col-sm-8">{{currentEmployee.Status}}</span></div>
@@ -20,8 +20,12 @@
         <input id="inputId"  [(ngModel)]="newEmployee.Id" placeholder="id" class="form-control"> 
     </div>
     <div class="form-group">
-      <label for="inputName">Name</label>
-        <input id="inputName" [(ngModel)]="newEmployee.Name" placeholder="name" class="form-control"> 
+      <label for="inputName">FirstName</label>
+        <input id="inputFirstName" [(ngModel)]="newEmployee.FirstName" placeholder="name" class="form-control"> 
+    </div>
+    <div class="form-group">
+      <label for="inputName">LastName</label>
+        <input id="inputLastName" [(ngModel)]="newEmployee.LastName" placeholder="name" class="form-control"> 
     </div>
     <div class="form-group">
       <label for="inputStartDate">Recruitment Date</label>

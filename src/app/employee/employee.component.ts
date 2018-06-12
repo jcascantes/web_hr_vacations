@@ -10,8 +10,8 @@ import { Holiday } from '../holiday';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-  currentEmployee: Employee;
-  newEmployee: Employee = {Id:0, Name:'', Status:'A', StartDate:0};
+  newEmployee: Employee = {Id:0, FirstName: '', LastName:'', Status:'A', StartDate:0};
+  currentEmployee: Employee = this.newEmployee;
   edit: true;
   message: string;
   holidayList: Holiday[];
@@ -20,7 +20,8 @@ export class EmployeeComponent implements OnInit {
     private holidayService: HolidayService) { }
 
   ngOnInit() {
-    this.getEmployee(1);
+    this.getEmployee(112640076);
+    
   }
 
   getEmployee(id: number): void{
