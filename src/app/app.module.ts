@@ -8,12 +8,14 @@ import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HolidaysComponent } from './holidays/holidays.component';
 import {HttpClientModule} from '@angular/common/http';
+import { EmployeesComponent } from './employees/employees.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeComponent,
-    HolidaysComponent
+    HolidaysComponent,
+    EmployeesComponent
   ],
   imports: [
     BrowserModule,

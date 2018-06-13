@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { EmployeeService } from '../employee.service';
-import { HolidayService } from '../holiday.service';
-import { Employee } from '../employee';
-import { Holiday } from '../holiday';
+import { EmployeeService } from '../services/employee.service';
+import { HolidayService } from '../services/holiday.service';
+import { Employee } from '../entities/employee';
+import { Holiday } from '../entities/holiday';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-employee',
@@ -17,10 +18,11 @@ export class EmployeeComponent implements OnInit {
   holidayList: Holiday[];
   
   constructor(private employeeService: EmployeeService, 
-    private holidayService: HolidayService) { }
+    private holidayService: HolidayService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getEmployee(112640076);
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.getEmployee(id);
     
   }
 

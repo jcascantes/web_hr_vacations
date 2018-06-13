@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Holiday } from './holiday';
+import { Holiday } from '../entities/holiday';
 import { Observable, of } from 'rxjs';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Employee } from './employee';
+import { Employee } from '../entities/employee';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ConfigService } from './config.service'; 
@@ -16,10 +16,17 @@ export class EmployeeService {
 
 
  getEmployee(id: number): Observable<Employee>{
-     return this.http.get<string>(this.config.getServiceUrl()+ 'employee/' + id.toString())
+     return this.http.get<string>(this.config.getServiceUrl() + 'employee/' + id.toString())
      .pipe(
        map(body => JSON.parse(body))
      );     
+ }
+
+ getEmployees(): Observable<Employee[]>{
+   return this.http.get<string>(this.config.getServiceUrl() + 'employees')
+   .pipe(
+      map(body => JSON.parse(body))
+   );
  }
 
  createEmployee(newEmployee: Employee): Observable<boolean> {

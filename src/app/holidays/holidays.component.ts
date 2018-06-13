@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Holiday } from '../holiday';
+import { Holiday } from '../entities/holiday';
 
 @Component({
   selector: 'app-holidays',
