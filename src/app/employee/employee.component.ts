@@ -4,6 +4,8 @@ import { HolidayService } from '../services/holiday.service';
 import { Employee } from '../entities/employee';
 import { Holiday } from '../entities/holiday';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { pipe } from '@angular/core/src/render3/pipe';
 
 @Component({
   selector: 'app-employee',
@@ -11,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-  newEmployee: Employee = {Id:0, FirstName: '', LastName:'', Status:'A', StartDate:0};
+  newEmployee: Employee = {Id:0, FirstName: '', LastName:'', Status:'A', StartDate: Date.now()};
   currentEmployee: Employee = this.newEmployee;
   edit: true;
   message: string;
@@ -40,15 +42,24 @@ export class EmployeeComponent implements OnInit {
   }
 
   public saveClicked(event, item):void{
-    this.employeeService.createEmployee(this.newEmployee)
-    .subscribe((result) => this.message = 'Employee successfuly saved',
-                error => this.message = 'Error saving employee'
-              );
+    if(this.validate(this.newEmployee)){
+      this.employeeService.createEmployee(this.newEmployee)
+      .subscribe(result => this.newEmployee = result,
+                  error => this.message = 'Error saving employee' + JSON.parse(error)
+                );
+    }else{
+      this.message = 'Validation error';
+    }
   }
 
   getHolidaysForEmployee(employeeId: number): void{
     this.holidayService.getHolidayList(employeeId)
     .subscribe(holidayList => this.holidayList = holidayList);
-}
+  }
+
+  validate(employee: Employee): boolean{
+    return employee.Id > 0 && employee.FirstName.length > 0 
+    && employee.LastName.length > 0;
+  }
 
 }
