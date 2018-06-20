@@ -36,12 +36,18 @@ export class EmployeeService {
  createEmployee(newEmployee: Employee): Observable<Employee> {
   return this.http.post<string>(this.config.getServiceUrl() + 'employee', JSON.stringify(newEmployee))
   .pipe(
-    map(body => JSON.parse(body)),
-    catchError(this.handleError)
+    map(body => JSON.parse(body))
   );
  }
 
- private handleError(error: HttpErrorResponse) {
+ updateEmployee(existingEmployee: Employee): Observable<Employee> {
+   return this.http.patch<string>(this.config.getServiceUrl() + 'employee', JSON.stringify(existingEmployee))
+   .pipe(
+     map(body => JSON.parse(body))
+   );
+ }
+
+ /*private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {
     // A client-side or network error occurred. Handle it accordingly.
     console.error('An error occurred:', error.error.message);
@@ -55,5 +61,5 @@ export class EmployeeService {
   // return an observable with a user-facing error message
   return throwError(
     'Something bad happened; please try again later.');
-};
+};*/
 }

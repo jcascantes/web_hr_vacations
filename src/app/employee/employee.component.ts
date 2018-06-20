@@ -15,7 +15,8 @@ import { pipe } from '@angular/core/src/render3/pipe';
 export class EmployeeComponent implements OnInit {
   newEmployee: Employee = {Id:0, FirstName: '', LastName:'', Status:'A', StartDate: Date.now()};
   currentEmployee: Employee = this.newEmployee;
-  edit: true;
+  edit: boolean;
+  create: boolean;
   message: string;
   holidayList: Holiday[];
   
@@ -33,8 +34,13 @@ export class EmployeeComponent implements OnInit {
     .subscribe(employee => this.currentEmployee = employee);
   }
 
+  public createModeClicked(event,item):void{
+    this.create = true;
+  }
+
   public editModeClicked(event,item):void{
     this.edit = true;
+    this.newEmployee = this.currentEmployee;
   }
 
   public loadHolidaysClicked(event, item):void{
@@ -43,13 +49,24 @@ export class EmployeeComponent implements OnInit {
 
   public saveClicked(event, item):void{
     if(this.validate(this.newEmployee)){
-      this.employeeService.createEmployee(this.newEmployee)
-      .subscribe(result => this.newEmployee = result,
-                  error => this.message = 'Error saving employee' + JSON.parse(error)
-                );
+      if(this.create){
+          this.employeeService.createEmployee(this.newEmployee)
+          .subscribe(result => this.newEmployee = result,
+                      error => this.message = 'Error saving employee' + JSON.parse(error)
+                    );
+      }else if(this.edit){
+        this.employeeService.updateEmployee(this.newEmployee)
+        .subscribe(result => this.currentEmployee = result
+        );
+      }
     }else{
       this.message = 'Validation error';
     }
+  }
+
+  public cancelClicked(event, item){
+    this.create = false;
+    this.edit = false;
   }
 
   getHolidaysForEmployee(employeeId: number): void{
