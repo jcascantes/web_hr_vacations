@@ -1,0 +1,46 @@
+<div *ngIf="!edit && !create" class="row">
+  <div class="col-md-4">
+    <h1>Employee Details </h1>
+    <h2>{{currentEmployee.FirstName}} {{currentEmployee.LastName}}</h2>
+    <div class="row"><label class="col-sm-4">Id: </label><span class="col-sm-8">{{currentEmployee.Id}}</span></div>
+    <div class="row"><label class="col-sm-4">Recruitment Date:</label><span class="col-sm-8">{{currentEmployee.StartDate | date}}</span></div>
+    <div class="row"><label class="col-sm-4">Current status:</label><span class="col-sm-8">{{currentEmployee.Status}}</span></div>
+    <input type="button" class="btn btn-success m-1" (click)="createModeClicked($event, item)" value="New" > 
+    <input type="button" class="btn btn-primary m-1" (click)="editModeClicked($event, item)" value="Edit" > 
+    <input type="button" class="btn btn-info" (click)="loadHolidaysClicked($event, item)" value="Load holidays historic" > 
+  </div>
+  <div class="col-md-8">
+    <app-holidays [holidayList]="holidayList"></app-holidays>
+  </div>
+</div>
+
+<div *ngIf="create || edit" class="row" >
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="inputId">Employee Id</label>
+        <input [disabled]="edit" id="inputId"  [(ngModel)]="newEmployee.Id" placeholder="id" class="form-control"> 
+    </div>
+    <div class="form-group">
+      <label for="inputName">FirstName</label>
+        <input id="inputFirstName" [(ngModel)]="newEmployee.FirstName" placeholder="name" class="form-control"> 
+    </div>
+    <div class="form-group">
+      <label for="inputName">LastName</label>
+        <input id="inputLastName" [(ngModel)]="newEmployee.LastName" placeholder="name" class="form-control"> 
+    </div>
+    <div class="form-group">
+      <label for="inputStartDate">Recruitment Date</label>
+        <input id="inputStartDate" [(ngModel)]="newEmployee.StartDate" type="date" placeholder="Recruitment Date" class="form-control">   
+    </div>
+    <div class="form-group">
+      <input type="button" class="btn btn-primary" (click)="saveClicked($event,item)" value="Save" >
+      <input type="button" class="btn btn-secondary" (click)="cancelClicked($event,item)" value="Cancel" >
+    </div>
+  </div>
+</div>
+<div *ngIf="message" class="alert alert-danger" role="alert">
+  {{message}}
+</div>
+
+
+

@@ -1,0 +1,9 @@
+<div class="row">
+  <ul class="col-sm-6">
+    <li *ngFor="let employee of employeeList" class="list-group-item list-group-item-action">
+      <nav>
+        <a routerLink="/employee/{{employee.Id}}">{{employee.FirstName}} {{employee.LastName}}</a>
+      </nav>
+    </li>
+  </ul>
+</div>
